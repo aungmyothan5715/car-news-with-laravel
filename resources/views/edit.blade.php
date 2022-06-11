@@ -32,7 +32,7 @@
                         <input type="file" name="cover" value="{{ $post->cover_name }}" class="form-control">
                     </div>
                     <input type="submit" name="submit" value="Update Post" class="btn btn-success">
-                    <a href="{{ route('post.index') }}" class="btn btn-dark">Back <<</a>
+                    <a href="{{ route('index') }}" class="btn btn-dark">Back <<</a>
                     
                 </form>
             </div>

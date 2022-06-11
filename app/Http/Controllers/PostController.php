@@ -23,7 +23,8 @@ class PostController extends Controller
     public function index()
     {
         //$posts = Post::orderBy('id', 'desc')->get();
-        $posts = Post::latest()->paginate(6);
+       $posts = Post::latest()->paginate(6);
+       //$posts = Post::query()->where('title', 'LIKE', "%{Lam}%")->get();
 
         //dd($posts);
         return view('index', compact('posts'));
@@ -63,9 +64,9 @@ class PostController extends Controller
             $post->cover_name = $cover;
             $post->save();   
             
-            return redirect('/posts')->with('status', 'Post was added successfully');
+            return redirect('/home')->with('status', 'Post was added successfully');
         }else{
-            return redirect('/posts')->with('error', 'Post can create only Admin!!!');
+            return redirect('/home')->with('error', 'Post can create only Admin!!!');
         }
     }
 
@@ -117,9 +118,9 @@ class PostController extends Controller
             $post->cover_name = $cover;
             $post->save();
             
-            return redirect('/posts')->with('status', 'Post was update successfully');
+            return redirect('/home')->with('status', 'Post was update successfully');
         }else{
-            return redirect('/posts')->with('error', 'Post can update only Admin!!!');
+            return redirect('/home')->with('error', 'Post can update only Admin!!!');
         }
     }
 
@@ -135,7 +136,7 @@ class PostController extends Controller
         if(Gate::allows('post-delete')){
             Storage::delete('Upload/' . $post->cover_name);
             $post->delete();
-            return redirect('/posts')->with('status', 'Post was deleted successfully.');
+            return redirect('/home')->with('status', 'Post was deleted successfully.');
         }else{
             return back()->with('error', 'Post can delete only Admin!!!');
         }
